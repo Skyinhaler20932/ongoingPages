@@ -1,42 +1,151 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>CLF-C02 Status</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            margin: 0;
-            background: #f5f5f5;
-        }
-        .box {
-            background: white;
-            padding: 30px 40px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-            text-align: center;
-        }
-        .status {
-            font-size: 28px;
-            font-weight: bold;
-            color: #ff9800;
-        }
-        .sub {
-            margin-top: 10px;
-            color: #666;
-            font-size: 18px;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CLF-C02 Status</title>
+  <style>
+    body {
+      font-family: "Inter", Arial, sans-serif;
+      background: #fdf7f2;
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      padding: 40px;
+    }
+
+    .card {
+      background: white;
+      width: 800px;
+      border-radius: 18px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+      overflow: hidden;
+      border: 1px solid #f0d4b8;
+    }
+
+    .top-img {
+      height: 200px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background: #ffffff;
+    }
+    
+    .top-img img {
+      max-height: 100%;
+      width: auto;
+    }
+
+    .content {
+      padding: 30px 40px;
+    }
+
+    h1 {
+      font-size: 28px;
+      font-weight: 700;
+      margin-bottom: 5px;
+    }
+
+    .meta {
+      color: #555;
+      font-size: 16px;
+      margin-bottom: 20px;
+    }
+
+    .progress-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      width: 100%;
+      height: 10px;
+      background: #ffe8d2;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      width: 17%;
+      height: 100%;
+      background: #ff9900;
+    }
+
+    .date-box {
+      margin-top: 25px;
+      font-size: 16px;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    .countdown {
+      margin-top: 20px;
+      padding: 10px 0;
+      font-size: 22px;
+      font-weight: bold;
+      color: #ff9900;
+    }
+      .hourglass {
+      display: inline-block;
+      animation: spin 2s linear infinite;
+      margin-right: 6px;
+    }
+
+    @keyframes spin {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
+  </style>
 </head>
 <body>
-    <div class="box">
-        <div class="status">⏳ Ongoing</div>
-        <div class="sub">AWS CLF-C02 Certification – Not obtained yet</div>
+  <div class="card">
+    <div class="top-img">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS Logo">
+  </div>
+    <div class="content">
+
+      <h1><span class="hourglass">⏳</span>CLF-C02 – AWS Cloud Practitioner</h1>
+      <div class="meta">Status: <strong style="color:#ff9900;">Ongoing</strong></div>
+
+      <div class="progress-title">Progress</div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+
+      <div class="date-box">
+        <div>📅 Start Date: <strong>20 Nov 2025</strong></div>
+        <div>📅 Expected Completion: <strong>19 Jan 2026</strong></div>
+      </div>
+
+      <div class="countdown" id="countdown">Loading countdown...</div>
+
     </div>
+  </div>
+
+  <script>
+    const targetDate = new Date("2026-01-19T00:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const diff = targetDate - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").innerHTML = "✔ Completed";
+        return;
+      }
+
+      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("countdown").innerHTML =
+        `${days}d ${hours}h ${mins}m ${secs}s remaining`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
 </body>
 </html>
